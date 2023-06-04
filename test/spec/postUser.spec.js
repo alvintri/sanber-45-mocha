@@ -1,22 +1,26 @@
 //Create User
 const request = require("supertest")("https://reqres.in/api");
 const expect = require("chai").expect;
-const getUser = require("./getUser.spec")
+const userData = require("../../data/userData")
+
+const dataUser = {
+    name : "morp",
+    job : "qa"
+    //DATA DRIVEN TESTING
+}
 
 
 describe("Post /users", function(){
     it("create new user", async function(){
         const response = await request
-                        .put("/users")
+                        .post("/users")
                         .send({
-                            "name": "morpheus",
-                            "job": "leader"
+                            "name": userData.USER_DATA.name,
+                            "job": userData.USER_DATA.job
                         });
         
         expect(await response.statusCode).to.eql(201)
-        expect(await response.body.name).to.eql("morpheus2")
-        expect(await response.body.job).to.eql("leader")
-
-        const resp2 = await getUser.getUserPages(2)
+        expect(await response.body.name).to.eql(userData.USER_DATA.name)
+        expect(await response.body.job).to.eql(userData.USER_DATA.job)
     })
 })

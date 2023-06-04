@@ -14,9 +14,9 @@ describe("Post /users", function(){
                         .set({
                             Authorization : AUTH,
                             Accept : "application/json"
-                        })
+                        });
         
         expect(await response.statusCode).to.eql(401)
-        console.log(response)
+        console.log(response);
     })
 })
